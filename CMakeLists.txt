@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(live555_rtsp_client VERSION 0.1.0)
+add_compile_options(-std=c++17 -fpermissive)
+
+add_subdirectory(../RtspLibrary RtspLibrary)
+INCLUDE_DIRECTORIES(../RtspLibrary)
+set(OpenCV_DIR /usr/local/opencv-3.4.5/share/OpenCV)
+find_package(OpenCV REQUIRED)
+include_directories(/usr/local/include/liveMedia)
+include_directories(/usr/local/include/BasicUsageEnvironment)
+include_directories(/usr/local/include/groupsock)
+include_directories(/usr/local/include/UsageEnvironment)
+include_directories(/usr/local/ffmpeg/include)
+link_directories(/usr/local/ffmpeg/lib)
+
+aux_source_directory(. SRCS)
+add_executable(${PROJECT_NAME} ${SRCS})
+target_link_libraries(${PROJECT_NAME} RtspLibrary ${OpenCV_LIBS})
